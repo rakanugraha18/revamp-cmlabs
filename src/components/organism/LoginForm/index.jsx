@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormGroup from "../../molecules/FormGroup";
 import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import logo from "../../../assets/LogoSmartLiving.svg";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -13,11 +14,10 @@ const LoginForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-sm mx-auto bg-white p-8 shadow-md rounded-md"
-    >
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white p-8">
+      <div className="flex justify-center mb-6">
+        <img src={logo} alt="Login" className="w-[530px]" />
+      </div>
       <FormGroup label="Email">
         <Input
           type="email"
@@ -34,9 +34,30 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormGroup>
-      <Button variant="primary" type="submit">
-        Login
+      <div className="pb-4">
+        <a href="#" className="text-sm">
+          Forgot your password?
+        </a>
+      </div>
+      <div className="mb-4 items-start pb-14">
+        <label className="inline-flex items-center">
+          <input type="checkbox" className="form-checkbox text-blue-500" />
+          <span className="ml-2 text-sm">Stay logged in</span>
+        </label>
+      </div>
+      <Button variant="primary" size="large" type="submit">
+        Sign In
       </Button>
+      <div className="pt-14 flex justify-center">
+        <p>
+          {" "}
+          Don’t have an account?{" "}
+          <a href="#" className="font-semibold">
+            {" "}
+            Sign up Now
+          </a>
+        </p>
+      </div>
     </form>
   );
 };
