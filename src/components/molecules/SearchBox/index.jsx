@@ -1,22 +1,25 @@
 import React from "react";
-import Input from "../../atoms/Input";
+import InputForm from "../../atoms/Input";
 import Button from "../../atoms/Button";
+import { FaSearch } from "react-icons/fa"; // Import ikon pencarian
+
 const SearchBox = () => {
   return (
     <div className="flex justify-evenly gap-1">
-      <Input
+      <InputForm
         type="search"
         placeholder="Search..."
         onChange={(e) => setEmail(e.target.value)}
-        size={"small"}
+        icon={<FaSearch />} // Masukkan ikon ke dalam komponen Input
+        responsiveSize={"md-lg"}
       />
-      <Button
+      {/* <Button
         variant="primary"
         size="small"
         onClick={() => alert("Primary Button Clicked!")}
       >
         Go
-      </Button>
+      </Button> */}
     </div>
   );
 };

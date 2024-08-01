@@ -1,58 +1,125 @@
-import React, { useState } from "react";
-import FormGroup from "../../molecules/FormGroup";
-import Input from "../../atoms/Input";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../atoms/Button";
+import InputForm from "../../atoms/Input/index";
+import { useState } from "react";
+import loginUser from "../../api/loginUser";
 import logo from "../../../assets/LogoSmartLiving.svg";
 
-const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const MAX_LOGIN_ATTEMPTS = 8; // Set the maximum number of login attempts
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Email: ${email}\nPassword: ${password}`);
+const FormLogin = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false); // State for loading
+  const [error, setError] = useState(null);
+  const [loginAttempts, setLoginAttempts] = useState(0); // Track login attempts
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Memastikan formData yang dikirimkan tidak kosong
+      if (!formData.email || !formData.password) {
+        setError("Username or email and password must be filled.");
+        return;
+      }
+
+      // Check if the maximum number of login attempts has been reached
+      if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+        setError("Maximum login attempts reached. Please try again later.");
+        return;
+      }
+
+      // Set loading to true before making the API call
+      setLoading(true);
+
+      // Melanjutkan dengan proses login
+      const token = await loginUser(formData.email, formData.password);
+
+      // Reset loading to false after successful login
+      setLoading(false);
+
+      // Redirect setelah login berhasil
+      navigate("/");
+    } catch (error) {
+      console.error("Login error", error);
+      setError("Invalid username or password. Please try again."); // Set error message
+      // Reset loading to false after an error occurs
+      setLoading(false);
+      // Increment the login attempts counter
+      setLoginAttempts((prevAttempts) => prevAttempts + 1);
+    }
+  };
+
+  const remainingAttempts = MAX_LOGIN_ATTEMPTS - loginAttempts;
+
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white p-8">
-      <div className="flex justify-center mb-6">
+    <form className="max-w-2xl mx-auto bg-white p-8" onSubmit={handleLogin}>
+      <div className="flex justify-center">
         <img src={logo} alt="Login" className="w-[530px]" />
       </div>
-      <FormGroup label="Email">
-        <Input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </FormGroup>
-      <FormGroup label="Password">
-        <Input
-          type="password"
-          placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </FormGroup>
+      {error && <div className="text-red-500 text-sm font-medium">{error}</div>}
+      {loginAttempts >= 3 && (
+        <p className="text-gray-500 text-xs">
+          Remaining login attempts: {remainingAttempts}
+        </p>
+      )}
+      <InputForm
+        label="Email"
+        htmlFor="email"
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Enter your Email"
+        required
+        value={formData.email}
+        onChange={handleInputChange}
+      />
+      <InputForm
+        label="Your password"
+        htmlFor="password"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="••••••••"
+        required
+        value={formData.password}
+        onChange={handleInputChange}
+      />
       <div className="pb-4">
         <a href="#" className="text-sm">
           Forgot your password?
         </a>
       </div>
-      <div className="mb-4 items-start pb-14">
+      <div className="mb-4 items-start pb-12">
         <label className="inline-flex items-center">
           <input type="checkbox" className="form-checkbox text-blue-500" />
           <span className="ml-2 text-sm">Stay logged in</span>
         </label>
       </div>
-      <Button variant="primary" size="large" type="submit">
-        Sign In
+      <Button
+        type="submit"
+        classname={`dark:bg-[#16737a] dark:hover:bg-[#167a69] dark:focus:ring-[#167a69] bg-[#16737a] hover:bg-[#27858b] focus:ring-4 focus:ring-[#16737a] w-[80%]`}
+      >
+        {loading ? "Signing in..." : "Sign In"}
       </Button>
       <div className="pt-14 flex justify-center">
         <p>
           {" "}
           Don’t have an account?{" "}
-          <a href="#" className="font-semibold">
+          <a href="/register" className="font-semibold">
             {" "}
             Sign up Now
           </a>
@@ -62,4 +129,72 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default FormLogin;
+
+// import React, { useState } from "react";
+// import FormGroup from "../../molecules/FormGroup";
+// import Input from "../../atoms/Input";
+// import Button from "../../atoms/Button";
+// import logo from "../../../assets/LogoSmartLiving.svg";
+
+// const LoginForm = () => {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     alert(`Email: ${email}\nPassword: ${password}`);
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white p-8">
+//       <div className="flex justify-center mb-6">
+//         <img src={logo} alt="Login" className="w-[530px]" />
+//       </div>
+//       <FormGroup label="Email">
+//         <Input
+//           type="email"
+//           placeholder="Enter your email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//           width={"520px"}
+//         />
+//       </FormGroup>
+//       <FormGroup label="Password">
+//         <Input
+//           type="password"
+//           placeholder="Enter your password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           width={"520px"}
+//         />
+//       </FormGroup>
+//       <div className="pb-4">
+//         <a href="#" className="text-sm">
+//           Forgot your password?
+//         </a>
+//       </div>
+//       <div className="mb-4 items-start pb-14">
+//         <label className="inline-flex items-center">
+//           <input type="checkbox" className="form-checkbox text-blue-500" />
+//           <span className="ml-2 text-sm">Stay logged in</span>
+//         </label>
+//       </div>
+//       <Button variant="primary" size="large" type="submit">
+//         Sign In
+//       </Button>
+//       <div className="pt-14 flex justify-center">
+//         <p>
+//           {" "}
+//           Don’t have an account?{" "}
+//           <a href="#" className="font-semibold">
+//             {" "}
+//             Sign up Now
+//           </a>
+//         </p>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default LoginForm;
