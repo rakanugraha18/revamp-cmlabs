@@ -5,7 +5,7 @@ import logo from "../assets/LogoSmartLiving.svg";
 function LoginPage() {
   return (
     <div>
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center min-h-screen pt-6">
         <LoginForm />
       </div>
     </div>

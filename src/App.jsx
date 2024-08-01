@@ -4,10 +4,13 @@ import Layout from "./components/organism/Layouts";
 
 function App() {
   const location = useLocation();
-
+  const showHeader =
+    location.pathname !== "/login" && location.pathname !== "/register"; // Example condition
+  // const showFooter =
+  //   location.pathname !== "/Login" && location.pathname !== "/Register"; // Example condition
   return (
     <>
-      <Layout />
+      {showHeader && <Layout />}
       <main>
         <Outlet />
       </main>
