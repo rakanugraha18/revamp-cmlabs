@@ -119,7 +119,7 @@ const FormRegister = () => {
                 {errors.server}
               </div>
             )}
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between gap-4">
               <div>
                 <InputForm
                   label="First Name"
@@ -151,7 +151,7 @@ const FormRegister = () => {
                   onChange={handleInputChange}
                 />
                 {errors.lastName && (
-                  <div className="text-xs text-red-500 mt-[-8px] mb-3 dark:text-red-400">
+                  <div className="text-xs grid-cols-1 text-red-500 mt-[-8px] mb-3 dark:text-red-400">
                     {errors.lastName}
                   </div>
                 )}
