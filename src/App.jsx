@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Layout from "./components/organism/Layouts";
+import "flowbite/dist/flowbite.min.css";
 
 function App() {
   const location = useLocation();
