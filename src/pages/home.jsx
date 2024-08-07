@@ -5,7 +5,9 @@ import Slider from "../components/organism/Slider";
 function HomePage() {
   return (
     <div>
-      <Slider />
+      <div className="flex justify-center pb-[14px]">
+        <Slider />
+      </div>
       <Recomendation />
     </div>
   );

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "react-feather";
 
-const Carousel = ({
-  children: slides = [],
+export default function Carousel({
+  children: slides,
   autoSlide = false,
   autoSlideInterval = 3000,
-  width = 958,
-  height = 400,
-}) => {
+}) {
   const [curr, setCurr] = useState(0);
 
   const prev = () =>
@@ -20,44 +17,23 @@ const Carousel = ({
     if (!autoSlide) return;
     const slideInterval = setInterval(next, autoSlideInterval);
     return () => clearInterval(slideInterval);
-  }, [autoSlide, autoSlideInterval]);
-
+  }, []);
   return (
     <div
-      className="relative overflow-hidden"
-      style={{ width: `${width}px`, height: `${height}px` }}
+      className="overflow-hidden relative mx-auto"
+      style={{ width: "1086px" }}
     >
       <div
         className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
       >
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className="flex-shrink-0"
-            style={{
-              width: `${width}px`,
-              height: `${height}px`,
-              overflow: "hidden",
-            }}
-          >
-            {slide}
-          </div>
-        ))}
+        {slides}
       </div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 flex justify-between items-center w-full">
-        <button
-          onClick={prev}
-          className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white -ml-16"
-          style={{ left: "-30px" }}
-        >
+      <div className="absolute inset-0 flex items-center justify-between p-4">
+        <button onClick={prev} className=" text-gray-800 ">
           <ChevronLeft size={40} />
         </button>
-        <button
-          onClick={next}
-          className="p-1 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white -mr-16"
-          style={{ right: "-30px" }}
-        >
+        <button onClick={next} className=" text-gray-800  ">
           <ChevronRight size={40} />
         </button>
       </div>
@@ -66,24 +42,14 @@ const Carousel = ({
         <div className="flex items-center justify-center gap-2">
           {slides.map((_, i) => (
             <div
-              key={i}
-              className={`transition-all w-3 h-3  ${
-                curr === i ? "p-2" : "bg-opacity-50"
-              }`}
+              className={`
+              transition-all w-3 h-3
+              ${curr === i ? "p-2" : "bg-opacity-50"}
+            `}
             />
           ))}
         </div>
       </div>
     </div>
   );
-};
-
-Carousel.propTypes = {
-  children: PropTypes.node,
-  autoSlide: PropTypes.bool,
-  autoSlideInterval: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number,
-};
-
-export default Carousel;
+}

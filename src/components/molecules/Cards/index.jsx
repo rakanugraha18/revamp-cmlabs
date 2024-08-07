@@ -13,7 +13,7 @@ export default function Card(props) {
   return (
     <>
       <Link to={`${redirect}/${id}`}>
-        <div className="flex flex-col align-start gap-[10px] p-2 h-[327px] w-44 hover:border-2 hover:border-[#16697A] hover:rounded-[10px]">
+        <div className="flex flex-col align-start gap-[10px] p-2 md:h-[327px] md:w-44 hover:border-2 hover:border-[#16697A] hover:rounded-[10px]">
           <div>
             <img
               className="w-full h-full object-cover rounded-lg"

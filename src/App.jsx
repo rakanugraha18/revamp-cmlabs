@@ -11,10 +11,12 @@ function App() {
   //   location.pathname !== "/Login" && location.pathname !== "/Register"; // Example condition
   return (
     <>
-      {showHeader && <Layout />}
-      <main>
-        <Outlet />
-      </main>
+      <div className="md:mx-16 md:my-5 lg:mx-32 lg:my-10 ">
+        {showHeader && <Layout />}
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 }
