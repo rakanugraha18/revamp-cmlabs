@@ -3,6 +3,7 @@ import Recomendation from "../components/organism/Recomendation";
 import Slider from "../components/organism/Slider";
 import CollectionColor from "../components/organism/CollectionColor";
 import Articles from "../components/organism/Articles";
+import Subscription from "../components/organism/Subscription";
 
 function HomePage() {
   return (
@@ -13,6 +14,7 @@ function HomePage() {
       <Recomendation />
       <CollectionColor />
       <Articles />
+      <Subscription />
     </div>
   );
 }

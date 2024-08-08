@@ -8,10 +8,10 @@ import Blue from "../../../assets/images/color/blue.png";
 import Pink from "../../../assets/images/color/pink.png";
 
 const colorImages = [
-  { id: 1, name: "Green Collection", image: Green },
-  { id: 2, name: "Orange Collection", image: Orange },
-  { id: 3, name: "Blue Collection", image: Blue },
-  { id: 4, name: "Pink Collection", image: Pink },
+  { id: 1, name: "GREEN", image: Green },
+  { id: 2, name: "ORANGE", image: Orange },
+  { id: 3, name: "BLUE", image: Blue },
+  { id: 4, name: "PINK", image: Pink },
 ];
 
 const CollectionColor = () => {
