@@ -12,7 +12,7 @@ function App() {
     location.pathname !== "/login" && location.pathname !== "/register"; // Example condition
   return (
     <>
-      <div className="md:mx-16 md:my-5 lg:mx-32 lg:my-10 ">
+      <div className="">
         {showHeader && <Header />}
         <main>
           <Outlet />
