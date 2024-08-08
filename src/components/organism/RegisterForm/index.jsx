@@ -12,10 +12,8 @@ const FormRegister = () => {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     phoneNumber: "",
-    address: "",
-    postalCode: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -59,6 +57,7 @@ const FormRegister = () => {
         formData.firstName,
         formData.lastName,
         formData.email,
+        formData.phoneNumber,
         formData.password
       );
       setLoading(false);
@@ -193,7 +192,59 @@ const FormRegister = () => {
                 </div>
               )}
             </div>
+
             <div>
+              <InputForm
+                label="Your Password"
+                htmlFor="password"
+                type="password"
+                name="password"
+                id="password"
+                placeholder="••••••••"
+                required
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+              {errors.password && (
+                <div className="text-xs text-red-500 mt-[-8px] mb-3 dark:text-red-400">
+                  {errors.password}
+                </div>
+              )}
+            </div>
+            <div className="mb-4">
+              <label className="inline-flex justify-center items-center">
+                <input
+                  type="checkbox"
+                  name="termsAccepted"
+                  className="form-checkbox text-[#16737a]"
+                />
+                <span className="ml-2 text-sm">
+                  By checking the box, I agree to the terms of sale and privacy
+                  policy
+                </span>
+              </label>
+            </div>
+            <div className="flex justify-center">
+              <Button
+                size="large"
+                color="primary"
+                type="submit"
+                classname={` hover:bg-[#27858b] focus:ring-4 focus:ring-[#16737a]`}
+              >
+                {loading ? "Register loading..." : "Sign up account"}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FormRegister;
+
+{
+  /* <div>
               <TextArea
                 label="Address"
                 htmlFor="address"
@@ -227,49 +278,5 @@ const FormRegister = () => {
                   {errors.postalCode}
                 </div>
               )}
-            </div>
-            <div>
-              <InputForm
-                label="Your Password"
-                htmlFor="password"
-                type="password"
-                name="password"
-                id="password"
-                placeholder="••••••••"
-                required
-                value={formData.password}
-                onChange={handleInputChange}
-              />
-              {errors.password && (
-                <div className="text-xs text-red-500 mt-[-8px] mb-3 dark:text-red-400">
-                  {errors.password}
-                </div>
-              )}
-            </div>
-            <div className="mb-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="termsAccepted"
-                  className="form-checkbox text-[#16737a]"
-                />
-                <span className="ml-2 text-sm">
-                  By checking the box, I agree to the terms of sale and privacy
-                  policy
-                </span>
-              </label>
-            </div>
-            <Button
-              type="submit"
-              classname={`dark:bg-[#16737a] dark:hover:bg-[#167a69] dark:focus:ring-[#167a69] bg-[#16737a] hover:bg-[#27858b] focus:ring-4 focus:ring-[#16737a] w-full lg:w-[75%] lg:mx-16 mx-auto`}
-            >
-              {loading ? "Register loading..." : "Sign up account"}
-            </Button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default FormRegister;
+            </div> */
+}

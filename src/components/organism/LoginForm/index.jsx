@@ -110,12 +110,16 @@ const FormLogin = () => {
           <span className="ml-2 text-sm">Stay logged in</span>
         </label>
       </div>
-      <Button
-        type="submit"
-        classname={`dark:bg-[#16737a] dark:hover:bg-[#167a69] dark:focus:ring-[#167a69] bg-[#16737a] hover:bg-[#27858b] focus:ring-4 focus:ring-[#16737a] w-[80%]`}
-      >
-        {loading ? "Signing in..." : "Sign In"}
-      </Button>
+      <div className="flex justify-center">
+        <Button
+          type="submit"
+          size="large"
+          color="primary"
+          classname={` hover:bg-[#27858b] focus:ring-4 focus:ring-[#16737a] `}
+        >
+          {loading ? "Signing in..." : "Sign In"}
+        </Button>
+      </div>
       <div className="pt-14 flex justify-center">
         <p>
           {" "}
