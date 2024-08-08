@@ -8,14 +8,14 @@ const sliders = [Slider1, Slider2, Slider3, Slider4];
 
 export default function Sliders2() {
   return (
-    <div className="md:h-full w-full">
+    <div className="md:h-full w-full mx-4 mt-3">
       <Carousel autoSlide={true} autoSlideInterval={3000}>
         {sliders.map((slider, index) => (
           <img
             key={index}
             src={slider}
             alt={`Slider ${index + 1}`}
-            className="mx-[64px] md:w-full md:h-full"
+            className="w-full h-auto"
           />
         ))}
       </Carousel>

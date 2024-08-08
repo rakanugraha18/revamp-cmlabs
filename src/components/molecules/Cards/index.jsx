@@ -8,31 +8,48 @@ export default function Card(props) {
     priceAfterDiscount,
     freeDelivery,
     id,
+    description,
+    date,
+    classname,
     redirect,
+    currency,
+    borderRadius = "10px", // Default border radius
   } = props;
+
   return (
-    <>
-      <Link to={`${redirect}/${id}`}>
-        <div className="flex flex-col align-start gap-[10px] p-2 md:h-[327px] md:w-44 hover:border-2 hover:border-[#16697A] hover:rounded-[10px]">
-          <div>
-            <img
-              className="w-full h-full object-cover rounded-lg"
-              src={img}
-              alt={title}
-            />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-[#16697A]">{title}</p>
-          </div>
-          <div className="text-[10px] text-wrap">Rp. {beforeDiscount}</div>
-          <div className="inline-block text-[12px] bg-[#D9D9D9]">
-            Rp.{priceAfterDiscount}
-          </div>
-          <div>
-            <p className="text-[10px]">{freeDelivery}</p>
-          </div>
+    <Link to={`${redirect}/${id}`}>
+      <div
+        className={`flex flex-col gap-[10px] p-2 hover:border-2 hover:border-[#16697A] ${classname}`}
+        style={{
+          borderRadius: borderRadius,
+        }}
+      >
+        <div style={{ flexGrow: 1 }}>
+          <img
+            className="w-full h-full object-cover rounded-lg"
+            src={img}
+            alt={title}
+          />
         </div>
-      </Link>
-    </>
+        <div>
+          <p className="text-sm font-semibold text-[#16697A]">{title}</p>
+        </div>
+        <div>
+          <p className="text-[14px]">{description}</p>
+        </div>
+        <div>
+          <p className="text-[12px]">{date}</p>
+        </div>
+        <div className="text-[10px] text-wrap">
+          {currency} {beforeDiscount}
+        </div>
+        <div className="inline-block text-[12px] bg-[#D9D9D9]">
+          {currency} {priceAfterDiscount}
+        </div>
+        <div>
+          <p className="text-[10px]">{freeDelivery}</p>
+        </div>
+      </div>
+    </Link>
   );
 }

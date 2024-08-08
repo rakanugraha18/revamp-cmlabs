@@ -1,6 +1,8 @@
 import React from "react";
 import Recomendation from "../components/organism/Recomendation";
 import Slider from "../components/organism/Slider";
+import CollectionColor from "../components/organism/CollectionColor";
+import Articles from "../components/organism/Articles";
 
 function HomePage() {
   return (
@@ -9,6 +11,8 @@ function HomePage() {
         <Slider />
       </div>
       <Recomendation />
+      <CollectionColor />
+      <Articles />
     </div>
   );
 }
