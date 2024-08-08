@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 
 const SearchBox = () => {
   return (
-    <div className="flex justify-center items-center mt-4">
+    <div className="md:flex justify-center items-center mt-4 hidden lg:flex xl:flex">
       <div className="relative w-full max-w-xs">
         <input
           type="text"

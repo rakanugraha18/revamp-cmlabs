@@ -28,7 +28,7 @@ const Recomendation = () => {
         <div className="flex justify-between flex-wrap p-4">
           {dataProduct.length > 0 ? (
             dataProduct.map((product, i) => (
-              <div key={i} className="w-full sm:w-1/2 md:w-1/3 lg:w-1/5 p-2">
+              <div key={i} className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/5 p-2">
                 <Card
                   redirect="#"
                   id={product.id}
